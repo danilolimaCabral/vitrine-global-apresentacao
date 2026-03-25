@@ -1,0 +1,1148 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Vitrine Global ERP — Apresentação</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet"/>
+<style>
+*{margin:0;padding:0;box-sizing:border-box;}
+:root{
+  --p:#4F46E5;--p2:#7C3AED;--p3:#818CF8;
+  --acc:#06B6D4;--ok:#10B981;--warn:#F59E0B;--err:#EF4444;
+  --dark:#0F172A;--d2:#1E293B;--d3:#334155;
+  --gray:#64748B;--gl:#94A3B8;--border:#E2E8F0;--bg:#F8FAFC;
+}
+html,body{width:100%;height:100%;overflow:hidden;font-family:'Inter',sans-serif;background:#000;}
+
+/* ── DECK ── */
+.deck{width:100vw;height:100vh;position:relative;}
+.slide{
+  position:absolute;inset:0;
+  display:flex;flex-direction:column;
+  opacity:0;pointer-events:none;
+  transition:opacity .5s ease, transform .5s ease;
+  transform:translateX(60px);
+  overflow:hidden;
+}
+.slide.active{opacity:1;pointer-events:all;transform:translateX(0);}
+.slide.out{opacity:0;transform:translateX(-60px);}
+
+/* ── NAV BAR ── */
+.nav{
+  position:fixed;bottom:32px;left:50%;transform:translateX(-50%);
+  display:flex;align-items:center;gap:12px;z-index:999;
+  background:rgba(15,23,42,.85);backdrop-filter:blur(16px);
+  border:1px solid rgba(255,255,255,.1);border-radius:40px;padding:10px 20px;
+}
+.nav-btn{
+  width:36px;height:36px;border-radius:50%;border:none;cursor:pointer;
+  display:flex;align-items:center;justify-content:center;font-size:16px;
+  background:rgba(255,255,255,.08);color:#fff;transition:all .2s;
+}
+.nav-btn:hover{background:var(--p);}
+.nav-counter{color:var(--gl);font-size:12px;font-weight:600;min-width:48px;text-align:center;}
+.nav-dots{display:flex;gap:6px;align-items:center;}
+.nav-dot{
+  width:6px;height:6px;border-radius:50%;background:rgba(255,255,255,.25);
+  cursor:pointer;transition:all .2s;
+}
+.nav-dot.active{background:var(--p);width:20px;border-radius:3px;}
+.nav-key{color:rgba(255,255,255,.3);font-size:10px;margin-left:4px;}
+
+/* ── PROGRESS BAR ── */
+.progress{position:fixed;top:0;left:0;height:3px;background:linear-gradient(90deg,var(--p),var(--p2));transition:width .4s ease;z-index:1000;}
+
+/* ── SLIDE NÚMERO ── */
+.slide-num{
+  position:absolute;top:24px;right:32px;
+  color:rgba(255,255,255,.2);font-size:11px;font-weight:600;
+  letter-spacing:1px;z-index:10;
+}
+
+/* ══════════════════════════════════════
+   SLIDE 1 — CAPA
+══════════════════════════════════════ */
+.s1{background:linear-gradient(135deg,#0F172A 0%,#1a1040 50%,#0F172A 100%);}
+.s1-bg{position:absolute;inset:0;overflow:hidden;}
+.s1-circle1{
+  position:absolute;top:-200px;right:-200px;
+  width:700px;height:700px;border-radius:50%;
+  background:radial-gradient(circle,rgba(79,70,229,.2) 0%,transparent 70%);
+  animation:pulse 4s ease-in-out infinite;
+}
+.s1-circle2{
+  position:absolute;bottom:-300px;left:-200px;
+  width:600px;height:600px;border-radius:50%;
+  background:radial-gradient(circle,rgba(124,58,237,.15) 0%,transparent 70%);
+  animation:pulse 5s ease-in-out infinite reverse;
+}
+@keyframes pulse{0%,100%{transform:scale(1);}50%{transform:scale(1.05);}}
+.s1-grid{
+  position:absolute;inset:0;
+  background-image:linear-gradient(rgba(79,70,229,.06) 1px,transparent 1px),
+    linear-gradient(90deg,rgba(79,70,229,.06) 1px,transparent 1px);
+  background-size:60px 60px;
+}
+.s1-content{
+  position:relative;z-index:2;
+  display:flex;flex-direction:column;align-items:center;justify-content:center;
+  height:100%;text-align:center;padding:60px;
+}
+.s1-logo{
+  width:80px;height:80px;border-radius:20px;
+  background:linear-gradient(135deg,var(--p),var(--p2));
+  display:flex;align-items:center;justify-content:center;
+  font-size:32px;font-weight:900;color:#fff;margin-bottom:32px;
+  box-shadow:0 0 60px rgba(79,70,229,.5);
+  animation:float 3s ease-in-out infinite;
+}
+@keyframes float{0%,100%{transform:translateY(0);}50%{transform:translateY(-8px);}}
+.s1-badge{
+  display:inline-flex;align-items:center;gap:8px;
+  background:rgba(79,70,229,.2);border:1px solid rgba(79,70,229,.4);
+  color:var(--p3);padding:6px 16px;border-radius:20px;
+  font-size:12px;font-weight:600;margin-bottom:24px;letter-spacing:.5px;
+}
+.s1-badge::before{content:'●';color:var(--ok);font-size:8px;}
+.s1 h1{color:#fff;font-size:64px;font-weight:900;line-height:1.1;margin-bottom:16px;}
+.s1 h1 span{background:linear-gradient(135deg,var(--p3),var(--acc));-webkit-background-clip:text;-webkit-text-fill-color:transparent;}
+.s1-sub{color:var(--gl);font-size:20px;font-weight:400;margin-bottom:48px;max-width:600px;}
+.s1-pills{display:flex;gap:12px;flex-wrap:wrap;justify-content:center;}
+.s1-pill{
+  background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.12);
+  color:rgba(255,255,255,.7);padding:8px 18px;border-radius:20px;font-size:13px;font-weight:500;
+}
+
+/* ══════════════════════════════════════
+   SLIDE 2 — O PROBLEMA
+══════════════════════════════════════ */
+.s2{background:var(--dark);}
+.s2-content{display:flex;flex-direction:column;justify-content:center;height:100%;padding:60px 80px;}
+.slide-label{color:var(--p3);font-size:12px;font-weight:700;text-transform:uppercase;letter-spacing:2px;margin-bottom:16px;}
+.slide-title{color:#fff;font-size:48px;font-weight:800;line-height:1.1;margin-bottom:12px;}
+.slide-title span{background:linear-gradient(135deg,var(--p3),var(--acc));-webkit-background-clip:text;-webkit-text-fill-color:transparent;}
+.slide-desc{color:var(--gl);font-size:16px;margin-bottom:48px;max-width:600px;line-height:1.7;}
+.problem-grid{display:grid;grid-template-columns:1fr 1fr;gap:20px;max-width:900px;}
+.problem-card{
+  background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.08);
+  border-radius:16px;padding:24px;display:flex;align-items:flex-start;gap:16px;
+  transition:all .3s;
+}
+.problem-card:hover{background:rgba(239,68,68,.08);border-color:rgba(239,68,68,.3);}
+.problem-icon{font-size:28px;flex-shrink:0;}
+.problem-card h3{color:#fff;font-size:15px;font-weight:700;margin-bottom:6px;}
+.problem-card p{color:var(--gl);font-size:13px;line-height:1.5;}
+
+/* ══════════════════════════════════════
+   SLIDE 3 — A SOLUÇÃO
+══════════════════════════════════════ */
+.s3{background:linear-gradient(135deg,#0F172A,#1a1040);}
+.s3-content{display:flex;align-items:center;height:100%;padding:60px 80px;gap:60px;}
+.s3-left{flex:1;}
+.s3-right{flex:1;display:flex;flex-direction:column;gap:16px;}
+.solution-item{
+  background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.08);
+  border-radius:14px;padding:20px 24px;display:flex;align-items:center;gap:16px;
+  transition:all .3s;
+}
+.solution-item:hover{background:rgba(79,70,229,.1);border-color:rgba(79,70,229,.4);transform:translateX(8px);}
+.sol-num{
+  width:36px;height:36px;border-radius:10px;flex-shrink:0;
+  background:linear-gradient(135deg,var(--p),var(--p2));
+  display:flex;align-items:center;justify-content:center;
+  font-size:14px;font-weight:800;color:#fff;
+}
+.solution-item h3{color:#fff;font-size:14px;font-weight:700;margin-bottom:3px;}
+.solution-item p{color:var(--gl);font-size:12px;}
+
+/* ══════════════════════════════════════
+   SLIDE 4 — MÓDULOS
+══════════════════════════════════════ */
+.s4{background:var(--dark);}
+.s4-content{display:flex;flex-direction:column;height:100%;padding:50px 80px;}
+.modules-grid{display:grid;grid-template-columns:repeat(5,1fr);gap:16px;flex:1;align-content:center;}
+.module-card{
+  background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.08);
+  border-radius:16px;padding:20px;text-align:center;
+  transition:all .3s;cursor:default;
+}
+.module-card:hover{
+  background:rgba(79,70,229,.12);border-color:rgba(79,70,229,.4);
+  transform:translateY(-4px);box-shadow:0 20px 40px rgba(79,70,229,.2);
+}
+.module-card .icon{font-size:32px;margin-bottom:12px;}
+.module-card h3{color:#fff;font-size:13px;font-weight:700;margin-bottom:6px;}
+.module-card p{color:var(--gl);font-size:11px;line-height:1.4;}
+.module-card .tag{
+  display:inline-block;margin-top:10px;
+  background:rgba(79,70,229,.2);color:var(--p3);
+  font-size:10px;font-weight:700;padding:2px 8px;border-radius:4px;
+}
+.module-card .tag.p1{background:rgba(245,158,11,.15);color:#FCD34D;}
+
+/* ══════════════════════════════════════
+   SLIDE 5 — FLUXO DE NEGÓCIO
+══════════════════════════════════════ */
+.s5{background:linear-gradient(135deg,#0F172A,#1a1040);}
+.s5-content{display:flex;flex-direction:column;height:100%;padding:50px 80px;}
+.flow-track{
+  display:flex;align-items:stretch;gap:0;flex:1;
+  margin-top:32px;
+}
+.flow-node{
+  flex:1;background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.08);
+  border-radius:16px;padding:24px 16px;display:flex;flex-direction:column;align-items:center;
+  text-align:center;position:relative;transition:all .3s;
+}
+.flow-node:hover{background:rgba(79,70,229,.1);border-color:rgba(79,70,229,.4);}
+.flow-node:not(:last-child)::after{
+  content:'›';position:absolute;right:-18px;top:50%;transform:translateY(-50%);
+  color:var(--p3);font-size:28px;font-weight:300;z-index:2;
+}
+.flow-node .fn-num{
+  width:40px;height:40px;border-radius:50%;
+  background:linear-gradient(135deg,var(--p),var(--p2));
+  display:flex;align-items:center;justify-content:center;
+  font-size:16px;font-weight:800;color:#fff;margin-bottom:14px;flex-shrink:0;
+}
+.flow-node .fn-icon{font-size:28px;margin-bottom:10px;}
+.flow-node h3{color:#fff;font-size:13px;font-weight:700;margin-bottom:8px;}
+.flow-node ul{list-style:none;text-align:left;width:100%;}
+.flow-node ul li{color:var(--gl);font-size:11px;padding:3px 0;border-bottom:1px solid rgba(255,255,255,.05);}
+.flow-node ul li:last-child{border:none;}
+.flow-node ul li::before{content:'→ ';color:var(--p3);}
+
+/* ══════════════════════════════════════
+   SLIDE 6 — WIREFRAME DASHBOARD
+══════════════════════════════════════ */
+.s6{background:#0a0a1a;}
+.s6-content{display:flex;align-items:center;height:100%;padding:50px 80px;gap:60px;}
+.s6-left{flex:0 0 380px;}
+.s6-right{flex:1;}
+.screen-frame{
+  border-radius:16px;overflow:hidden;
+  box-shadow:0 40px 80px rgba(0,0,0,.6),0 0 0 1px rgba(255,255,255,.08);
+  transform:perspective(1000px) rotateY(-5deg) rotateX(2deg);
+  transition:transform .4s;
+}
+.screen-frame:hover{transform:perspective(1000px) rotateY(0deg) rotateX(0deg);}
+.screen-frame img{width:100%;display:block;}
+.feature-list{display:flex;flex-direction:column;gap:14px;}
+.feature-item{
+  display:flex;align-items:flex-start;gap:14px;
+  background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.08);
+  border-radius:12px;padding:16px;transition:all .3s;
+}
+.feature-item:hover{background:rgba(79,70,229,.1);border-color:rgba(79,70,229,.3);}
+.feature-icon{
+  width:36px;height:36px;border-radius:10px;flex-shrink:0;
+  background:linear-gradient(135deg,var(--p),var(--p2));
+  display:flex;align-items:center;justify-content:center;font-size:16px;
+}
+.feature-item h4{color:#fff;font-size:13px;font-weight:700;margin-bottom:3px;}
+.feature-item p{color:var(--gl);font-size:12px;line-height:1.4;}
+
+/* ══════════════════════════════════════
+   SLIDE 7 — WIREFRAME CARGAS
+══════════════════════════════════════ */
+.s7{background:#0a0a1a;}
+.s7-content{display:flex;align-items:center;height:100%;padding:50px 80px;gap:60px;}
+.s7-left{flex:1;}
+.s7-right{flex:0 0 520px;}
+
+/* ══════════════════════════════════════
+   SLIDE 8 — WIREFRAME FINANCEIRO
+══════════════════════════════════════ */
+.s8{background:#0a0a1a;}
+.s8-content{display:flex;align-items:center;height:100%;padding:50px 80px;gap:60px;}
+
+/* ══════════════════════════════════════
+   SLIDE 9 — ARQUITETURA TÉCNICA
+══════════════════════════════════════ */
+.s9{background:var(--dark);}
+.s9-content{display:flex;flex-direction:column;height:100%;padding:50px 80px;}
+.arch-grid{display:grid;grid-template-columns:1fr 1fr 1fr;gap:16px;flex:1;align-content:center;}
+.arch-card{
+  background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.08);
+  border-radius:14px;padding:20px;display:flex;align-items:flex-start;gap:14px;
+  transition:all .3s;
+}
+.arch-card:hover{background:rgba(79,70,229,.08);border-color:rgba(79,70,229,.3);}
+.arch-icon{
+  width:40px;height:40px;border-radius:10px;flex-shrink:0;
+  display:flex;align-items:center;justify-content:center;font-size:20px;
+}
+.arch-card .tech{color:var(--p3);font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:.5px;margin-bottom:3px;}
+.arch-card h4{color:#fff;font-size:13px;font-weight:700;margin-bottom:4px;}
+.arch-card p{color:var(--gl);font-size:11px;line-height:1.5;}
+
+/* ══════════════════════════════════════
+   SLIDE 10 — MULTI-FILIAL
+══════════════════════════════════════ */
+.s10{background:linear-gradient(135deg,#0F172A,#1a1040);}
+.s10-content{display:flex;align-items:center;height:100%;padding:60px 80px;gap:60px;}
+.s10-left{flex:1;}
+.s10-right{flex:1;}
+.mf-diagram{display:flex;flex-direction:column;gap:16px;}
+.mf-row2{display:flex;align-items:center;gap:12px;}
+.mf-box2{
+  background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.12);
+  border-radius:10px;padding:12px 16px;color:#fff;font-size:12px;font-weight:600;text-align:center;
+  flex:1;
+}
+.mf-box2.primary{background:linear-gradient(135deg,var(--p),var(--p2));border:none;}
+.mf-arrow2{color:var(--p3);font-size:20px;flex-shrink:0;}
+.filial-cards{display:flex;flex-direction:column;gap:12px;}
+.filial-card{
+  background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.08);
+  border-radius:12px;padding:16px 20px;display:flex;align-items:center;gap:14px;
+}
+.filial-dot{width:10px;height:10px;border-radius:50%;flex-shrink:0;}
+.filial-card h4{color:#fff;font-size:13px;font-weight:700;}
+.filial-card p{color:var(--gl);font-size:11px;}
+.roles-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:20px;}
+.role-badge{
+  background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.08);
+  border-radius:8px;padding:10px 14px;
+}
+.role-badge .name{font-size:12px;font-weight:700;margin-bottom:2px;}
+.role-badge .desc{color:var(--gl);font-size:10px;}
+
+/* ══════════════════════════════════════
+   SLIDE 11 — BANCO DE DADOS
+══════════════════════════════════════ */
+.s11{background:#0a0a1a;}
+.s11-content{display:flex;align-items:center;height:100%;padding:50px 80px;gap:60px;}
+.s11-left{flex:1;}
+.s11-right{flex:0 0 500px;}
+.er-frame{
+  border-radius:16px;overflow:hidden;
+  box-shadow:0 40px 80px rgba(0,0,0,.6),0 0 0 1px rgba(255,255,255,.08);
+}
+.er-frame img{width:100%;display:block;}
+.db-stats{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-top:24px;}
+.db-stat{
+  background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.08);
+  border-radius:12px;padding:16px;text-align:center;
+}
+.db-stat .val{font-size:32px;font-weight:800;background:linear-gradient(135deg,var(--p3),var(--acc));-webkit-background-clip:text;-webkit-text-fill-color:transparent;}
+.db-stat .lbl{color:var(--gl);font-size:11px;margin-top:4px;}
+
+/* ══════════════════════════════════════
+   SLIDE 12 — ROADMAP
+══════════════════════════════════════ */
+.s12{background:var(--dark);}
+.s12-content{display:flex;flex-direction:column;height:100%;padding:50px 80px;}
+.roadmap-track{display:flex;gap:20px;flex:1;align-items:stretch;margin-top:32px;}
+.rm-phase{
+  flex:1;border-radius:16px;padding:24px;display:flex;flex-direction:column;
+  border:1px solid rgba(255,255,255,.08);background:rgba(255,255,255,.04);
+  position:relative;overflow:hidden;transition:all .3s;
+}
+.rm-phase:hover{transform:translateY(-4px);}
+.rm-phase::before{content:'';position:absolute;top:0;left:0;right:0;height:4px;}
+.rm-p1::before{background:linear-gradient(90deg,var(--p),var(--p2));}
+.rm-p2::before{background:linear-gradient(90deg,var(--p2),var(--acc));}
+.rm-p3::before{background:linear-gradient(90deg,var(--acc),var(--ok));}
+.rm-p4::before{background:linear-gradient(90deg,var(--ok),var(--warn));}
+.rm-phase h3{color:#fff;font-size:14px;font-weight:700;margin-bottom:4px;}
+.rm-phase .weeks{color:var(--gl);font-size:11px;margin-bottom:16px;}
+.rm-phase ul{list-style:none;flex:1;}
+.rm-phase ul li{
+  color:var(--gl);font-size:12px;padding:6px 0;
+  border-bottom:1px solid rgba(255,255,255,.05);
+  display:flex;align-items:center;gap:8px;
+}
+.rm-phase ul li:last-child{border:none;}
+.rm-phase ul li::before{content:'';width:5px;height:5px;border-radius:50%;background:var(--p3);flex-shrink:0;}
+.rm-total{
+  margin-top:24px;background:rgba(79,70,229,.1);border:1px solid rgba(79,70,229,.3);
+  border-radius:12px;padding:16px 24px;display:flex;align-items:center;justify-content:space-between;
+}
+.rm-total .t1{color:var(--gl);font-size:13px;}
+.rm-total .t2{color:#fff;font-size:24px;font-weight:800;}
+.rm-total .t3{color:var(--gl);font-size:12px;text-align:right;}
+
+/* ══════════════════════════════════════
+   SLIDE 13 — MARKETPLACE
+══════════════════════════════════════ */
+.s13{background:#0a0a1a;}
+.s13-content{display:flex;align-items:center;height:100%;padding:50px 80px;gap:60px;}
+.s13-left{flex:1;}
+.s13-right{flex:0 0 520px;}
+.market-cards{display:flex;flex-direction:column;gap:14px;}
+.market-card{
+  background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.08);
+  border-radius:12px;padding:16px 20px;display:flex;align-items:center;gap:14px;
+  transition:all .3s;
+}
+.market-card:hover{background:rgba(79,70,229,.08);border-color:rgba(79,70,229,.3);}
+.market-card .mk-icon{font-size:28px;flex-shrink:0;}
+.market-card h4{color:#fff;font-size:13px;font-weight:700;margin-bottom:3px;}
+.market-card p{color:var(--gl);font-size:12px;}
+.market-card .mk-badge{
+  margin-left:auto;padding:3px 10px;border-radius:20px;font-size:10px;font-weight:700;
+  background:rgba(16,185,129,.15);color:#6EE7B7;flex-shrink:0;
+}
+.rules-box{
+  background:rgba(245,158,11,.08);border:1px solid rgba(245,158,11,.2);
+  border-radius:12px;padding:16px 20px;margin-top:16px;
+}
+.rules-box h4{color:#FCD34D;font-size:13px;font-weight:700;margin-bottom:10px;}
+.rules-box ul{list-style:none;}
+.rules-box ul li{color:var(--gl);font-size:12px;padding:4px 0;display:flex;align-items:center;gap:8px;}
+.rules-box ul li::before{content:'⚡';font-size:10px;}
+
+/* ══════════════════════════════════════
+   SLIDE 14 — ENCERRAMENTO
+══════════════════════════════════════ */
+.s14{background:linear-gradient(135deg,#0F172A 0%,#1a1040 50%,#0F172A 100%);}
+.s14-bg{position:absolute;inset:0;overflow:hidden;}
+.s14-circle{
+  position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);
+  width:800px;height:800px;border-radius:50%;
+  background:radial-gradient(circle,rgba(79,70,229,.12) 0%,transparent 70%);
+}
+.s14-content{
+  position:relative;z-index:2;
+  display:flex;flex-direction:column;align-items:center;justify-content:center;
+  height:100%;text-align:center;padding:60px;
+}
+.s14-logo{
+  width:80px;height:80px;border-radius:20px;
+  background:linear-gradient(135deg,var(--p),var(--p2));
+  display:flex;align-items:center;justify-content:center;
+  font-size:32px;font-weight:900;color:#fff;margin-bottom:32px;
+  box-shadow:0 0 60px rgba(79,70,229,.5);
+}
+.s14 h1{color:#fff;font-size:52px;font-weight:900;line-height:1.1;margin-bottom:16px;}
+.s14 h1 span{background:linear-gradient(135deg,var(--p3),var(--acc));-webkit-background-clip:text;-webkit-text-fill-color:transparent;}
+.s14-sub{color:var(--gl);font-size:18px;margin-bottom:48px;max-width:600px;line-height:1.6;}
+.s14-stats{display:flex;gap:40px;justify-content:center;margin-bottom:48px;}
+.s14-stat{text-align:center;}
+.s14-stat .val{font-size:40px;font-weight:900;background:linear-gradient(135deg,var(--p3),var(--acc));-webkit-background-clip:text;-webkit-text-fill-color:transparent;}
+.s14-stat .lbl{color:var(--gl);font-size:13px;margin-top:4px;}
+.s14-cta{
+  display:inline-flex;align-items:center;gap:10px;
+  background:linear-gradient(135deg,var(--p),var(--p2));
+  color:#fff;padding:14px 32px;border-radius:12px;font-size:15px;font-weight:700;
+  border:none;cursor:pointer;box-shadow:0 0 40px rgba(79,70,229,.4);
+  transition:all .3s;
+}
+.s14-cta:hover{transform:translateY(-2px);box-shadow:0 0 60px rgba(79,70,229,.6);}
+
+/* ── ANIMAÇÕES DE ENTRADA ── */
+.fade-up{opacity:0;transform:translateY(30px);transition:all .6s ease;}
+.slide.active .fade-up{opacity:1;transform:translateY(0);}
+.fade-up:nth-child(1){transition-delay:.1s;}
+.fade-up:nth-child(2){transition-delay:.2s;}
+.fade-up:nth-child(3){transition-delay:.3s;}
+.fade-up:nth-child(4){transition-delay:.4s;}
+.fade-up:nth-child(5){transition-delay:.5s;}
+.fade-up:nth-child(6){transition-delay:.6s;}
+</style>
+</head>
+<body>
+
+<div class="progress" id="progress"></div>
+
+<div class="deck" id="deck">
+
+  <!-- ══ SLIDE 1 — CAPA ══ -->
+  <div class="slide s1 active" data-slide="1">
+    <div class="s1-bg">
+      <div class="s1-circle1"></div>
+      <div class="s1-circle2"></div>
+      <div class="s1-grid"></div>
+    </div>
+    <div class="s1-content">
+      <div class="s1-logo">VG</div>
+      <div class="s1-badge">Sistema Integrado de Gestão — v1.0</div>
+      <h1>Vitrine Global<br/><span>ERP</span></h1>
+      <p class="s1-sub">Plataforma completa para gestão de importação, vendas, estoque e financeiro — multi-filial, escalável e construída do zero.</p>
+      <div class="s1-pills">
+        <span class="s1-pill">🏭 Importação</span>
+        <span class="s1-pill">💰 Financeiro</span>
+        <span class="s1-pill">📦 Estoque</span>
+        <span class="s1-pill">🛒 Marketplace</span>
+        <span class="s1-pill">🏢 Multi-Filial</span>
+        <span class="s1-pill">🐘 PostgreSQL</span>
+      </div>
+    </div>
+    <div class="slide-num">01 / 14</div>
+  </div>
+
+  <!-- ══ SLIDE 2 — O PROBLEMA ══ -->
+  <div class="slide s2" data-slide="2">
+    <div class="s2-content">
+      <div class="slide-label fade-up">O Cenário Atual</div>
+      <h2 class="slide-title fade-up">A operação hoje<br/><span>vive em planilhas</span></h2>
+      <p class="slide-desc fade-up">A Vitrine Global gerencia toda a operação de importação, vendas e financeiro em planilhas Excel. Isso gera riscos, retrabalho e limita o crescimento.</p>
+      <div class="problem-grid">
+        <div class="problem-card fade-up">
+          <div class="problem-icon">📊</div>
+          <div>
+            <h3>17 abas de planilha</h3>
+            <p>Cargas, itens, orçamentos, pedidos, financeiro, estoque — tudo separado e sem integração automática.</p>
+          </div>
+        </div>
+        <div class="problem-card fade-up">
+          <div class="problem-icon">🔢</div>
+          <div>
+            <h3>Cálculos manuais</h3>
+            <p>Custo unitário BRL, rateio de frete, cotação USD por etapa — tudo calculado manualmente com risco de erro.</p>
+          </div>
+        </div>
+        <div class="problem-card fade-up">
+          <div class="problem-icon">🏢</div>
+          <div>
+            <h3>Sem visão multi-filial</h3>
+            <p>Cada filial mantém seus próprios controles. Não há consolidação automática de resultados.</p>
+          </div>
+        </div>
+        <div class="problem-card fade-up">
+          <div class="problem-icon">🛒</div>
+          <div>
+            <h3>Marketplace manual</h3>
+            <p>Pedidos do Mercado Livre, Shopee e Amazon são controlados manualmente, sem sincronização de estoque.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="slide-num">02 / 14</div>
+  </div>
+
+  <!-- ══ SLIDE 3 — A SOLUÇÃO ══ -->
+  <div class="slide s3" data-slide="3">
+    <div class="s3-content">
+      <div class="s3-left">
+        <div class="slide-label fade-up">A Solução</div>
+        <h2 class="slide-title fade-up">Um ERP construído<br/><span>para o seu negócio</span></h2>
+        <p class="slide-desc fade-up">Sistema integrado que substitui todas as planilhas com automação inteligente, dados em tempo real e escalabilidade para crescer com a empresa.</p>
+        <div style="margin-top:32px;" class="fade-up">
+          <div style="display:flex;gap:24px;">
+            <div style="text-align:center;">
+              <div style="font-size:36px;font-weight:900;background:linear-gradient(135deg,#818CF8,#06B6D4);-webkit-background-clip:text;-webkit-text-fill-color:transparent;">10</div>
+              <div style="color:#64748B;font-size:12px;margin-top:4px;">Módulos</div>
+            </div>
+            <div style="text-align:center;">
+              <div style="font-size:36px;font-weight:900;background:linear-gradient(135deg,#818CF8,#06B6D4);-webkit-background-clip:text;-webkit-text-fill-color:transparent;">35+</div>
+              <div style="color:#64748B;font-size:12px;margin-top:4px;">Telas</div>
+            </div>
+            <div style="text-align:center;">
+              <div style="font-size:36px;font-weight:900;background:linear-gradient(135deg,#818CF8,#06B6D4);-webkit-background-clip:text;-webkit-text-fill-color:transparent;">20+</div>
+              <div style="color:#64748B;font-size:12px;margin-top:4px;">Tabelas</div>
+            </div>
+            <div style="text-align:center;">
+              <div style="font-size:36px;font-weight:900;background:linear-gradient(135deg,#818CF8,#06B6D4);-webkit-background-clip:text;-webkit-text-fill-color:transparent;">13</div>
+              <div style="color:#64748B;font-size:12px;margin-top:4px;">Semanas</div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="s3-right">
+        <div class="solution-item fade-up">
+          <div class="sol-num">1</div>
+          <div><h3>Importação Automatizada</h3><p>Carga → custo unitário BRL calculado automaticamente com rateio de frete e impostos.</p></div>
+        </div>
+        <div class="solution-item fade-up">
+          <div class="sol-num">2</div>
+          <div><h3>Ciclo Comercial Completo</h3><p>Orçamento → Pedido → Estoque → Conta a Receber em um único fluxo integrado.</p></div>
+        </div>
+        <div class="solution-item fade-up">
+          <div class="sol-num">3</div>
+          <div><h3>DRE Automático</h3><p>Fechamento mensal gerado automaticamente com Receita, CMV, OPEX e Resultado.</p></div>
+        </div>
+        <div class="solution-item fade-up">
+          <div class="sol-num">4</div>
+          <div><h3>Marketplace Integrado</h3><p>Sync automático com ML, Shopee e Amazon. Pausa de anúncios quando estoque zera.</p></div>
+        </div>
+        <div class="solution-item fade-up">
+          <div class="sol-num">5</div>
+          <div><h3>Multi-Filial Nativo</h3><p>Dados isolados por filial, consolidação automática no dashboard e escalabilidade SaaS.</p></div>
+        </div>
+      </div>
+    </div>
+    <div class="slide-num">03 / 14</div>
+  </div>
+
+  <!-- ══ SLIDE 4 — MÓDULOS ══ -->
+  <div class="slide s4" data-slide="4">
+    <div class="s4-content">
+      <div class="slide-label fade-up">Escopo Completo</div>
+      <h2 class="slide-title fade-up">10 módulos integrados</h2>
+      <div class="modules-grid">
+        <div class="module-card fade-up">
+          <div class="icon">📊</div>
+          <h3>Dashboard</h3>
+          <p>KPIs em tempo real, fluxo de caixa, estoque por categoria</p>
+          <span class="tag">P0</span>
+        </div>
+        <div class="module-card fade-up">
+          <div class="icon">🚢</div>
+          <h3>Importação</h3>
+          <p>Cargas, itens, plano de pagamento, custo unitário auto</p>
+          <span class="tag">P0</span>
+        </div>
+        <div class="module-card fade-up">
+          <div class="icon">📋</div>
+          <h3>Orçamentos</h3>
+          <p>Vinculado à carga, margem, PDF, conversão em pedido</p>
+          <span class="tag">P0</span>
+        </div>
+        <div class="module-card fade-up">
+          <div class="icon">🛍️</div>
+          <h3>Pedidos</h3>
+          <p>Reserva de estoque automática, contas a receber</p>
+          <span class="tag">P0</span>
+        </div>
+        <div class="module-card fade-up">
+          <div class="icon">💰</div>
+          <h3>Financeiro</h3>
+          <p>Movimentos, aportes, C/R, C/P, fluxo de caixa</p>
+          <span class="tag">P0</span>
+        </div>
+        <div class="module-card fade-up">
+          <div class="icon">📦</div>
+          <h3>Estoque</h3>
+          <p>Por filial e carga, alertas, transferências</p>
+          <span class="tag">P0</span>
+        </div>
+        <div class="module-card fade-up">
+          <div class="icon">📈</div>
+          <h3>Fechamento</h3>
+          <p>DRE automático, comparativo semestral, PDF</p>
+          <span class="tag p1">P1</span>
+        </div>
+        <div class="module-card fade-up">
+          <div class="icon">🛒</div>
+          <h3>Marketplace</h3>
+          <p>ML, Shopee, Amazon, sync 5min, pausa auto</p>
+          <span class="tag p1">P1</span>
+        </div>
+        <div class="module-card fade-up">
+          <div class="icon">👥</div>
+          <h3>Cadastros</h3>
+          <p>Clientes, fornecedores, produtos, canais</p>
+          <span class="tag">P0</span>
+        </div>
+        <div class="module-card fade-up">
+          <div class="icon">⚙️</div>
+          <h3>Configurações</h3>
+          <p>Filiais, usuários, permissões, painel master</p>
+          <span class="tag">P0</span>
+        </div>
+      </div>
+    </div>
+    <div class="slide-num">04 / 14</div>
+  </div>
+
+  <!-- ══ SLIDE 5 — FLUXO ══ -->
+  <div class="slide s5" data-slide="5">
+    <div class="s5-content">
+      <div class="slide-label fade-up">Fluxo Operacional</div>
+      <h2 class="slide-title fade-up">Da importação ao <span>fechamento mensal</span></h2>
+      <div class="flow-track">
+        <div class="flow-node fade-up">
+          <div class="fn-icon">🚢</div>
+          <h3>Carga Criada</h3>
+          <ul>
+            <li>Fornecedor + Incoterm</li>
+            <li>Produtos + CBM + USD</li>
+            <li>Plano pagamento auto</li>
+            <li>Cotação USD registrada</li>
+          </ul>
+        </div>
+        <div class="flow-node fade-up">
+          <div class="fn-icon">📋</div>
+          <h3>Orçamento</h3>
+          <ul>
+            <li>Vinculado à carga</li>
+            <li>Margem aplicada</li>
+            <li>PDF gerado</li>
+            <li>Enviado ao cliente</li>
+          </ul>
+        </div>
+        <div class="flow-node fade-up">
+          <div class="fn-icon">✅</div>
+          <h3>Pedido</h3>
+          <ul>
+            <li>Convertido do ORC</li>
+            <li>Estoque reservado</li>
+            <li>C/R criada</li>
+            <li>NF vinculada</li>
+          </ul>
+        </div>
+        <div class="flow-node fade-up">
+          <div class="fn-icon">💸</div>
+          <h3>Financeiro</h3>
+          <ul>
+            <li>Aportes dos sócios</li>
+            <li>Pagto fornecedor</li>
+            <li>Recebimento cliente</li>
+            <li>Saldo atualizado</li>
+          </ul>
+        </div>
+        <div class="flow-node fade-up">
+          <div class="fn-icon">📦</div>
+          <h3>Carga Recebida</h3>
+          <ul>
+            <li>Status atualizado</li>
+            <li>Custo unit. calculado</li>
+            <li>Estoque atualizado</li>
+            <li>Custos rateados</li>
+          </ul>
+        </div>
+        <div class="flow-node fade-up">
+          <div class="fn-icon">📊</div>
+          <h3>DRE Mensal</h3>
+          <ul>
+            <li>Receita consolidada</li>
+            <li>CMV calculado</li>
+            <li>OPEX detalhado</li>
+            <li>PDF exportado</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+    <div class="slide-num">05 / 14</div>
+  </div>
+
+  <!-- ══ SLIDE 6 — DASHBOARD ══ -->
+  <div class="slide s6" data-slide="6">
+    <div class="s6-content">
+      <div class="s6-left">
+        <div class="slide-label fade-up">Tela 01</div>
+        <h2 class="slide-title fade-up">Dashboard<br/><span>Principal</span></h2>
+        <p class="slide-desc fade-up">Visão consolidada da operação com seletor de filial no topo.</p>
+        <div class="feature-list">
+          <div class="feature-item fade-up">
+            <div class="feature-icon">💰</div>
+            <div><h4>4 KPIs Críticos</h4><p>Saldo em Caixa, Cargas em Trânsito, A Receber e A Pagar em tempo real.</p></div>
+          </div>
+          <div class="feature-item fade-up">
+            <div class="feature-icon">📈</div>
+            <div><h4>Fluxo de Caixa</h4><p>Gráfico de linha com receitas e despesas dos últimos 6 meses.</p></div>
+          </div>
+          <div class="feature-item fade-up">
+            <div class="feature-icon">🏢</div>
+            <div><h4>Seletor de Filial</h4><p>Filtra todos os dados pela filial ativa ou consolida todas as unidades.</p></div>
+          </div>
+        </div>
+      </div>
+      <div class="s6-right fade-up">
+        <div class="screen-frame">
+          <img src="img/ui_dashboard.png" alt="Dashboard"/>
+        </div>
+      </div>
+    </div>
+    <div class="slide-num">06 / 14</div>
+  </div>
+
+  <!-- ══ SLIDE 7 — CARGAS ══ -->
+  <div class="slide s7" data-slide="7">
+    <div class="s7-content">
+      <div class="s7-left fade-up">
+        <div class="screen-frame">
+          <img src="img/ui_carga_detalhe.png" alt="Detalhe da Carga"/>
+        </div>
+      </div>
+      <div class="s7-right">
+        <div class="slide-label fade-up">Tela 02</div>
+        <h2 class="slide-title fade-up">Módulo de<br/><span>Importação</span></h2>
+        <p class="slide-desc fade-up">Coração do sistema — gerencia todo o ciclo de vida de uma carga de importação.</p>
+        <div class="feature-list">
+          <div class="feature-item fade-up">
+            <div class="feature-icon">📍</div>
+            <div><h4>Progress Steps</h4><p>Produção → Trânsito → Alfândega → Recebida com atualização em tempo real.</p></div>
+          </div>
+          <div class="feature-item fade-up">
+            <div class="feature-icon">💳</div>
+            <div><h4>Plano de Pagamento</h4><p>Parcelas Entrada/Produção/Embarque geradas automaticamente (30/40/30%).</p></div>
+          </div>
+          <div class="feature-item fade-up">
+            <div class="feature-icon">🧮</div>
+            <div><h4>Custo Unitário Auto</h4><p>Custo BRL por produto calculado automaticamente com rateio de frete e impostos.</p></div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="slide-num">07 / 14</div>
+  </div>
+
+  <!-- ══ SLIDE 8 — FINANCEIRO ══ -->
+  <div class="slide s8" data-slide="8">
+    <div class="s8-content">
+      <div class="s8-left" style="flex:1;">
+        <div class="slide-label fade-up">Telas 03 e 04</div>
+        <h2 class="slide-title fade-up">Financeiro &<br/><span>Fechamento Mensal</span></h2>
+        <p class="slide-desc fade-up">Central financeira completa com DRE automático gerado ao final de cada mês.</p>
+        <div class="feature-list">
+          <div class="feature-item fade-up">
+            <div class="feature-icon">💵</div>
+            <div><h4>5 Abas Financeiras</h4><p>Movimentos, C/Receber, C/Pagar, Aportes e Fluxo de Caixa em uma única tela.</p></div>
+          </div>
+          <div class="feature-item fade-up">
+            <div class="feature-icon">📊</div>
+            <div><h4>DRE Automático</h4><p>Receita Bruta → CMV → Lucro Bruto → OPEX → Resultado Operacional.</p></div>
+          </div>
+          <div class="feature-item fade-up">
+            <div class="feature-icon">📄</div>
+            <div><h4>Exportação PDF/Excel</h4><p>Relatório mensal exportável para compartilhar com sócios e contabilidade.</p></div>
+          </div>
+        </div>
+      </div>
+      <div style="flex:0 0 480px;display:flex;flex-direction:column;gap:16px;" class="fade-up">
+        <div class="screen-frame">
+          <img src="img/ui_financeiro.png" alt="Financeiro"/>
+        </div>
+        <div class="screen-frame">
+          <img src="img/ui_fechamento.png" alt="Fechamento Mensal"/>
+        </div>
+      </div>
+    </div>
+    <div class="slide-num">08 / 14</div>
+  </div>
+
+  <!-- ══ SLIDE 9 — STACK ══ -->
+  <div class="slide s9" data-slide="9">
+    <div class="s9-content">
+      <div class="slide-label fade-up">Decisões Técnicas</div>
+      <h2 class="slide-title fade-up">Stack tecnológica <span>escolhida</span></h2>
+      <div class="arch-grid">
+        <div class="arch-card fade-up">
+          <div class="arch-icon" style="background:#EEF2FF;">⚛️</div>
+          <div><div class="tech">Frontend</div><h4>React 18 + TypeScript + Vite</h4><p>Interface rápida, tipada e com hot-reload instantâneo durante o desenvolvimento.</p></div>
+        </div>
+        <div class="arch-card fade-up">
+          <div class="arch-icon" style="background:#F0FDF4;">🎨</div>
+          <div><div class="tech">UI</div><h4>shadcn/ui + Tailwind CSS</h4><p>Design system consistente e customizável com a identidade Vitrine Global.</p></div>
+        </div>
+        <div class="arch-card fade-up">
+          <div class="arch-icon" style="background:#FFF7ED;">⚡</div>
+          <div><div class="tech">Backend</div><h4>Node.js + Fastify</h4><p>Servidor de alta performance. Fastify é 2× mais rápido que Express.</p></div>
+        </div>
+        <div class="arch-card fade-up">
+          <div class="arch-icon" style="background:#EDE9FE;">🔗</div>
+          <div><div class="tech">API</div><h4>tRPC</h4><p>Type-safety total entre front e back. Elimina contratos de API manuais.</p></div>
+        </div>
+        <div class="arch-card fade-up">
+          <div class="arch-icon" style="background:#F0FDF4;">🐘</div>
+          <div><div class="tech">Banco de Dados</div><h4>PostgreSQL 16 + Drizzle ORM</h4><p>Arrays nativos, JSONB, colunas geradas e performance analítica para o DRE.</p></div>
+        </div>
+        <div class="arch-card fade-up">
+          <div class="arch-icon" style="background:#FEF2F2;">🔐</div>
+          <div><div class="tech">Auth</div><h4>JWT + bcrypt Local</h4><p>Sem OAuth externo. Controle total sobre sessões e fluxo de acesso.</p></div>
+        </div>
+        <div class="arch-card fade-up">
+          <div class="arch-icon" style="background:#FFF7ED;">📬</div>
+          <div><div class="tech">Filas</div><h4>BullMQ + Redis</h4><p>Sync de marketplaces assíncrono sem travar a interface do usuário.</p></div>
+        </div>
+        <div class="arch-card fade-up">
+          <div class="arch-icon" style="background:#EFF6FF;">📦</div>
+          <div><div class="tech">Monorepo</div><h4>Turborepo</h4><p>Tipos TypeScript compartilhados entre front e back. Mudança no schema reflete automaticamente.</p></div>
+        </div>
+        <div class="arch-card fade-up">
+          <div class="arch-icon" style="background:#F0FDF4;">🚀</div>
+          <div><div class="tech">Deploy</div><h4>Railway → AWS ECS</h4><p>Deploy simples no início. Migração para AWS ECS quando necessário escalar.</p></div>
+        </div>
+      </div>
+    </div>
+    <div class="slide-num">09 / 14</div>
+  </div>
+
+  <!-- ══ SLIDE 10 — MULTI-FILIAL ══ -->
+  <div class="slide s10" data-slide="10">
+    <div class="s10-content">
+      <div class="s10-left">
+        <div class="slide-label fade-up">Arquitetura</div>
+        <h2 class="slide-title fade-up">Multi-Filial<br/><span>nativo</span></h2>
+        <p class="slide-desc fade-up">Toda tabela operacional possui empresa_id e filial_id. O contexto é injetado automaticamente via JWT, garantindo isolamento total dos dados.</p>
+        <div class="mf-diagram fade-up">
+          <div class="mf-row2">
+            <div class="mf-box2 primary">Login<br/><small style="font-weight:400;opacity:.8;">JWT com empresa + filial</small></div>
+            <div class="mf-arrow2">→</div>
+            <div class="mf-box2">Middleware<br/><small style="color:#64748B;">Injeta contexto</small></div>
+            <div class="mf-arrow2">→</div>
+            <div class="mf-box2">PostgreSQL<br/><small style="color:#64748B;">WHERE filial_id = ?</small></div>
+          </div>
+        </div>
+        <div class="roles-grid fade-up">
+          <div class="role-badge">
+            <div class="name" style="color:#EF4444;">Admin Master</div>
+            <div class="desc">Acesso total a todas as filiais</div>
+          </div>
+          <div class="role-badge">
+            <div class="name" style="color:#818CF8;">Gerente</div>
+            <div class="desc">Filiais permitidas + relatórios</div>
+          </div>
+          <div class="role-badge">
+            <div class="name" style="color:#10B981;">Operador</div>
+            <div class="desc">Cargas, pedidos e estoque</div>
+          </div>
+          <div class="role-badge">
+            <div class="name" style="color:#F59E0B;">Financeiro</div>
+            <div class="desc">Módulo financeiro e DRE</div>
+          </div>
+        </div>
+      </div>
+      <div class="s10-right">
+        <div class="filial-cards fade-up">
+          <div style="color:#94A3B8;font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:1px;margin-bottom:8px;">Empresa: Vitrine Global</div>
+          <div class="filial-card">
+            <div class="filial-dot" style="background:#4F46E5;"></div>
+            <div><h4>Filial: Goiânia (Principal)</h4><p>Cargas, estoque e financeiro completamente isolados</p></div>
+          </div>
+          <div class="filial-card">
+            <div class="filial-dot" style="background:#7C3AED;"></div>
+            <div><h4>Filial: Sul</h4><p>Dados separados, dashboard próprio</p></div>
+          </div>
+          <div class="filial-card">
+            <div class="filial-dot" style="background:#06B6D4;"></div>
+            <div><h4>Filial: Nordeste</h4><p>Futura expansão — já suportada pela arquitetura</p></div>
+          </div>
+          <div style="margin-top:16px;background:rgba(79,70,229,.1);border:1px solid rgba(79,70,229,.3);border-radius:12px;padding:16px 20px;">
+            <div style="color:#818CF8;font-size:12px;font-weight:700;margin-bottom:6px;">🚀 Escalabilidade SaaS</div>
+            <div style="color:#64748B;font-size:12px;line-height:1.5;">A coluna empresa_id permite atender múltiplos clientes em uma única instância no futuro.</div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="slide-num">10 / 14</div>
+  </div>
+
+  <!-- ══ SLIDE 11 — BANCO DE DADOS ══ -->
+  <div class="slide s11" data-slide="11">
+    <div class="s11-content">
+      <div class="s11-left">
+        <div class="slide-label fade-up">Banco de Dados</div>
+        <h2 class="slide-title fade-up">PostgreSQL 16<br/><span>Schema completo</span></h2>
+        <p class="slide-desc fade-up">Mais de 20 tabelas interligadas, projetadas a partir da planilha operacional real da empresa.</p>
+        <div class="db-stats fade-up">
+          <div class="db-stat"><div class="val">20+</div><div class="lbl">Tabelas</div></div>
+          <div class="db-stat"><div class="val">8</div><div class="lbl">Grupos de Schema</div></div>
+          <div class="db-stat"><div class="val">100%</div><div class="lbl">Type-Safe</div></div>
+          <div class="db-stat"><div class="val">∞</div><div class="lbl">Escalável</div></div>
+        </div>
+        <div style="margin-top:20px;display:flex;flex-direction:column;gap:8px;" class="fade-up">
+          <div style="background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.08);border-radius:8px;padding:10px 14px;font-size:12px;color:#94A3B8;font-family:monospace;">infra → empresas, filiais, usuarios, sessoes</div>
+          <div style="background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.08);border-radius:8px;padding:10px 14px;font-size:12px;color:#94A3B8;font-family:monospace;">cargas → cargas, itens, pagamentos, custos</div>
+          <div style="background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.08);border-radius:8px;padding:10px 14px;font-size:12px;color:#94A3B8;font-family:monospace;">comercial → orcamentos, pedidos, itens</div>
+          <div style="background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.08);border-radius:8px;padding:10px 14px;font-size:12px;color:#94A3B8;font-family:monospace;">financeiro → movimentos, c_receber, c_pagar</div>
+        </div>
+      </div>
+      <div class="s11-right fade-up">
+        <div class="er-frame">
+          <img src="img/vitrine_global_er.png" alt="Diagrama ER"/>
+        </div>
+      </div>
+    </div>
+    <div class="slide-num">11 / 14</div>
+  </div>
+
+  <!-- ══ SLIDE 12 — ROADMAP ══ -->
+  <div class="slide s12" data-slide="12">
+    <div class="s12-content">
+      <div class="slide-label fade-up">Plano de Execução</div>
+      <h2 class="slide-title fade-up">Roadmap em <span>4 fases</span></h2>
+      <div class="roadmap-track">
+        <div class="rm-phase rm-p1 fade-up">
+          <h3>Fase 1 — Fundação</h3>
+          <div class="weeks">Semanas 1–4</div>
+          <ul>
+            <li>Setup Monorepo</li>
+            <li>PostgreSQL + Redis</li>
+            <li>Auth JWT Local</li>
+            <li>Estrutura Filiais</li>
+            <li>Gestão de Usuários</li>
+            <li>CRUD de Cargas</li>
+            <li>Plano de Pagamento</li>
+            <li>Custo Unitário Auto</li>
+          </ul>
+        </div>
+        <div class="rm-phase rm-p2 fade-up">
+          <h3>Fase 2 — Comercial</h3>
+          <div class="weeks">Semanas 5–8</div>
+          <ul>
+            <li>Cadastro Clientes</li>
+            <li>Cadastro Produtos</li>
+            <li>Orçamentos + PDF</li>
+            <li>Pedidos de Venda</li>
+            <li>Contas a Receber</li>
+            <li>Saldo de Estoque</li>
+            <li>Baixa Automática</li>
+            <li>Transferência Filiais</li>
+          </ul>
+        </div>
+        <div class="rm-phase rm-p3 fade-up">
+          <h3>Fase 3 — Financeiro</h3>
+          <div class="weeks">Semanas 9–11</div>
+          <ul>
+            <li>Movimentos Fin.</li>
+            <li>Aportes de Sócios</li>
+            <li>Contas a Pagar</li>
+            <li>Fluxo de Caixa</li>
+            <li>DRE Automático</li>
+            <li>Fechamento Mensal</li>
+            <li>Export PDF/Excel</li>
+          </ul>
+        </div>
+        <div class="rm-phase rm-p4 fade-up">
+          <h3>Fase 4 — Marketplace</h3>
+          <div class="weeks">Semanas 12–13</div>
+          <ul>
+            <li>ML OAuth</li>
+            <li>Shopee API</li>
+            <li>Sync Auto 5min</li>
+            <li>Pausa por Estoque</li>
+            <li>Painel Master</li>
+            <li>Deploy Produção</li>
+            <li>Documentação</li>
+          </ul>
+        </div>
+      </div>
+      <div class="rm-total fade-up">
+        <div class="t1">Prazo Total Estimado</div>
+        <div class="t2">13 semanas ≈ 3 meses</div>
+        <div class="t3">Com 1 desenvolvedor full-stack<br/>Entregas incrementais a cada fase</div>
+      </div>
+    </div>
+    <div class="slide-num">12 / 14</div>
+  </div>
+
+  <!-- ══ SLIDE 13 — MARKETPLACE ══ -->
+  <div class="slide s13" data-slide="13">
+    <div class="s13-content">
+      <div class="s13-left">
+        <div class="slide-label fade-up">Fase 4</div>
+        <h2 class="slide-title fade-up">Marketplace<br/><span>Integrado</span></h2>
+        <p class="slide-desc fade-up">Sincronização automática com as principais plataformas de venda online, com regras inteligentes de gestão de estoque e anúncios.</p>
+        <div class="market-cards">
+          <div class="market-card fade-up">
+            <div class="mk-icon">🤝</div>
+            <div><h4>Mercado Livre</h4><p>OAuth, 1.247 anúncios, comissão 11-19%, frete grátis &gt;R$79,90</p></div>
+            <span class="mk-badge">Conectado</span>
+          </div>
+          <div class="market-card fade-up">
+            <div class="mk-icon">🛍️</div>
+            <div><h4>Shopee</h4><p>892 anúncios ativos, sync automático a cada 5 minutos</p></div>
+            <span class="mk-badge">Conectado</span>
+          </div>
+          <div class="market-card fade-up">
+            <div class="mk-icon">📦</div>
+            <div><h4>Amazon</h4><p>Integração configurável, pedidos importados automaticamente</p></div>
+            <span class="mk-badge" style="background:rgba(245,158,11,.15);color:#FCD34D;">Em breve</span>
+          </div>
+        </div>
+        <div class="rules-box fade-up">
+          <h4>Regras Automáticas de Estoque</h4>
+          <ul>
+            <li>Alerta quando estoque &lt; 15 unidades</li>
+            <li>Pausa anúncio quando estoque zera</li>
+            <li>Reativa anúncio ao repor estoque</li>
+            <li>Prioridade para produtos de alto giro</li>
+          </ul>
+        </div>
+      </div>
+      <div class="s13-right fade-up">
+        <div class="screen-frame">
+          <img src="img/ui_marketplace.png" alt="Marketplace"/>
+        </div>
+      </div>
+    </div>
+    <div class="slide-num">13 / 14</div>
+  </div>
+
+  <!-- ══ SLIDE 14 — ENCERRAMENTO ══ -->
+  <div class="slide s14" data-slide="14">
+    <div class="s14-bg"><div class="s14-circle"></div></div>
+    <div class="s14-content">
+      <div class="s14-logo">VG</div>
+      <h1>Pronto para<br/><span>construir?</span></h1>
+      <p class="s14-sub">A arquitetura está definida, os wireframes aprovados e o roadmap traçado. O próximo passo é iniciar a Fase 1 e transformar a operação da Vitrine Global.</p>
+      <div class="s14-stats">
+        <div class="s14-stat"><div class="val">10</div><div class="lbl">Módulos</div></div>
+        <div class="s14-stat"><div class="val">35+</div><div class="lbl">Telas</div></div>
+        <div class="s14-stat"><div class="val">20+</div><div class="lbl">Tabelas</div></div>
+        <div class="s14-stat"><div class="val">13</div><div class="lbl">Semanas</div></div>
+        <div class="s14-stat"><div class="val">∞</div><div class="lbl">Escalável</div></div>
+      </div>
+      <button class="s14-cta" onclick="goTo(0)">↩ Ver apresentação novamente</button>
+    </div>
+    <div class="slide-num">14 / 14</div>
+  </div>
+
+</div><!-- /deck -->
+
+<!-- NAV -->
+<div class="nav">
+  <button class="nav-btn" id="prevBtn" onclick="prev()">‹</button>
+  <div class="nav-dots" id="dots"></div>
+  <span class="nav-counter" id="counter">1 / 14</span>
+  <button class="nav-btn" id="nextBtn" onclick="next()">›</button>
+  <span class="nav-key">← →</span>
+</div>
+
+<script>
+const TOTAL = 14;
+let current = 0;
+let animating = false;
+
+const slides = document.querySelectorAll('.slide');
+const dotsEl = document.getElementById('dots');
+const counter = document.getElementById('counter');
+const progress = document.getElementById('progress');
+
+// Build dots
+for(let i=0;i<TOTAL;i++){
+  const d = document.createElement('div');
+  d.className = 'nav-dot' + (i===0?' active':'');
+  d.onclick = ()=>goTo(i);
+  dotsEl.appendChild(d);
+}
+
+function updateNav(){
+  counter.textContent = (current+1) + ' / ' + TOTAL;
+  document.querySelectorAll('.nav-dot').forEach((d,i)=>{
+    d.classList.toggle('active', i===current);
+  });
+  progress.style.width = ((current+1)/TOTAL*100) + '%';
+}
+
+function goTo(idx){
+  if(animating || idx===current) return;
+  animating = true;
+  const prev = slides[current];
+  const next = slides[idx];
+  prev.classList.add('out');
+  prev.classList.remove('active');
+  setTimeout(()=>{ prev.classList.remove('out'); },500);
+  next.classList.add('active');
+  current = idx;
+  updateNav();
+  setTimeout(()=>{ animating=false; },500);
+}
+
+function next(){ if(current<TOTAL-1) goTo(current+1); }
+function prev(){ if(current>0) goTo(current-1); }
+
+document.addEventListener('keydown', e=>{
+  if(e.key==='ArrowRight'||e.key==='ArrowDown'||e.key===' ') next();
+  if(e.key==='ArrowLeft'||e.key==='ArrowUp') prev();
+  if(e.key==='Home') goTo(0);
+  if(e.key==='End') goTo(TOTAL-1);
+});
+
+// Touch/swipe
+let tx=0;
+document.addEventListener('touchstart',e=>{ tx=e.touches[0].clientX; });
+document.addEventListener('touchend',e=>{
+  const dx = e.changedTouches[0].clientX - tx;
+  if(Math.abs(dx)>50){ dx<0?next():prev(); }
+});
+
+updateNav();
+</script>
+</body>
+</html>
